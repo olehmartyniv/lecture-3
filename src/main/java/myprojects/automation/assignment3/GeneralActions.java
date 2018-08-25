@@ -3,8 +3,11 @@ package myprojects.automation.assignment3;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 import static myprojects.automation.assignment3.utils.Properties.getBaseAdminUrl;
 
@@ -47,16 +50,38 @@ public class GeneralActions {
      * @param categoryName
      */
     public void createCategory(String categoryName) {
-        // TODO implement logic for new category creation
-        throw new UnsupportedOperationException();
+        // enter to the 'category' menu
+        waitForContentLoad();
+        Actions action = new Actions(driver);
+        WebElement catalog = driver.findElement(By.linkText("Каталог"));
+        action.moveToElement(catalog).perform();
+        WebElement category = driver.findElement(By.linkText("категории"));
+        action.moveToElement(category).click().perform();
 
+        // enter to the 'add new category' page
+        waitForContentLoad();
+        WebElement addCategoryButton = driver.findElement(By.id("page-header-desc-category-new_category"));
+        addCategoryButton.click();
+
+        // add new category
+        waitForContentLoad();
+        WebElement categoryNameField = driver.findElement(By.id("name_1"));
+        categoryNameField.sendKeys(categoryName);
+        WebElement submit = driver.findElement(By.id("category_form_submit_btn"));
+        submit.click();
+
+        // check if confirmation message appears
+        waitForContentLoad();
+        List<WebElement> message = driver.findElements(By.xpath("//div[@class='alert alert-success']"));
+        if (message.size() > 0) System.out.println("Создано");
+        else System.out.println("Не создано");
     }
 
     /**
      * Waits until page loader disappears from the page
      */
     public void waitForContentLoad() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ajax_running")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ajax_running")));
     }
 
 }
