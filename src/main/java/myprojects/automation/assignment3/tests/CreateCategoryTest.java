@@ -14,9 +14,10 @@ public class CreateCategoryTest extends BaseScript {
         actions.login("webinar.test@gmail.com", "Xcg7299bnSmMuRLp9ITw");
 
         // create category
-        actions.createCategory("Men");
+        actions.createCategory("Kids");
 
         // check that new category appears in Categories table
+        actions.checkCategoryIfExist("Kids");
 
         driver.quit();
     }

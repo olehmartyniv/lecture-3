@@ -73,8 +73,26 @@ public class GeneralActions {
         // check if confirmation message appears
         waitForContentLoad();
         List<WebElement> message = driver.findElements(By.xpath("//div[@class='alert alert-success']"));
-        if (message.size() > 0) System.out.println("Создано");
-        else System.out.println("Не создано");
+        if (message.size() > 0) System.out.println("Категорию создано");
+        else System.out.println("Категорию не создано");
+    }
+
+    /**
+     * Checks whether category exist.
+     * @param categoryName
+     */
+    public void checkCategoryIfExist(String categoryName) {
+        // enter categoryName in search field and submit
+        waitForContentLoad();
+        WebElement search = driver.findElement(By.name("categoryFilter_name"));
+        search.sendKeys(categoryName);
+        search.submit();
+
+        // check present of category
+        waitForContentLoad();
+        WebElement message = driver.findElement(By.xpath("//table[@id='table-category']/tbody//td[3]"));
+        if (message.getText().equals(categoryName)) System.out.println("Категория присутствует");
+        else System.out.println("Категория отсутствует");
     }
 
     /**
