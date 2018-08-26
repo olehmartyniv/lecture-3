@@ -73,8 +73,8 @@ public class GeneralActions {
         // check if confirmation message appears
         waitForContentLoad();
         List<WebElement> message = driver.findElements(By.xpath("//div[@class='alert alert-success']"));
-        if (message.size() > 0) System.out.println("Категорию создано");
-        else System.out.println("Категорию не создано");
+        if (message.size() > 0) System.out.println("Категорию " + categoryName +  " создано");
+        else System.out.println("Категорию " + categoryName + " не создано");
     }
 
     /**
@@ -101,5 +101,4 @@ public class GeneralActions {
     public void waitForContentLoad() {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ajax_running")));
     }
-
 }

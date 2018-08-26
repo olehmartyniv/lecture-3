@@ -1,13 +1,13 @@
 package myprojects.automation.assignment3;
 
 import myprojects.automation.assignment3.utils.Properties;
+import myprojects.automation.assignment3.utils.WebDriverLogger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import java.beans.EventHandler;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
@@ -58,8 +58,8 @@ public abstract class BaseScript {
         // maximize window
         eventDriver.manage().window().maximize();
 
-        // TODO connect loggers
-        //eventDriver.register(new EventHandler());
+        // connect logger
+        eventDriver.register(new WebDriverLogger());
 
         return eventDriver;
     }
