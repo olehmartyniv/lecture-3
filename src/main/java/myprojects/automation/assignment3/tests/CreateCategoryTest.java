@@ -13,11 +13,14 @@ public class CreateCategoryTest extends BaseScript {
         // login
         actions.login("webinar.test@gmail.com", "Xcg7299bnSmMuRLp9ITw");
 
+        // generate category name
+        String categoryName = "Category_" + (int) (Math.random() * 99 + 1);
+
         // create category
-        actions.createCategory("Kids");
+        actions.createCategory(categoryName);
 
         // check that new category appears in Categories table
-        actions.checkCategoryIfExist("Kids");
+        actions.checkCategoryIfExist(categoryName);
 
         driver.quit();
     }
